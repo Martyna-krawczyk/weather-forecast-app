@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Min temp:</strong>
+  <%= @forecast.min_temp %>
+</p>
+
+<p>
+  <strong>Max temp:</strong>
+  <%= @forecast.max_temp %>
+</p>
+
+<p>
+  <strong>Short description:</strong>
+  <%= @forecast.short_description %>
+</p>
+
+<p>
+  <strong>Chance of rain:</strong>
+  <%= @forecast.chance_of_rain %>
+</p>
+
+<p>
+  <strong>Long description:</strong>
+  <%= @forecast.long_description %>
+</p>
+
+<p>
+  <strong>Uv index:</strong>
+  <%= @forecast.uv_index %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @forecast.date %>
+</p>
+
+<p>
+  <strong>Possible rainfall:</strong>
+  <%= @forecast.possible_rainfall %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @forecast.image_url %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @forecast.city.name %>
+</p>
+
+<%= link_to 'Edit', edit_forecast_path(@forecast) %> |
+<%= link_to 'Back', forecasts_path %>

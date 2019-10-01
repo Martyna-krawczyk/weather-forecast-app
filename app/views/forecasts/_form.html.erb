@@ -1,0 +1,67 @@
+<%= form_with(model: forecast, local: true) do |form| %>
+  <% if forecast.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(forecast.errors.count, "error") %> prohibited this forecast from being saved:</h2>
+
+      <ul>
+      <% forecast.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :min_temp %>
+    <%= form.number_field :min_temp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_temp %>
+    <%= form.number_field :max_temp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :short_description %>
+    <%= form.text_field :short_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :chance_of_rain %>
+    <%= form.number_field :chance_of_rain %>
+  </div>
+
+  <div class="field">
+    <%= form.label :long_description %>
+    <%= form.text_area :long_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uv_index %>
+    <%= form.text_field :uv_index %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :possible_rainfall %>
+    <%= form.text_field :possible_rainfall %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_area :image_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city_id %>
+    <%= form.select :city_id, options_for_select( City.all.collect { |u| [u.name, u.id] }, :selected => forecast.city_id ) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

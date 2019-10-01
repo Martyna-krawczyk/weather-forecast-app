@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Forecasts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Image url</th>
+      <th>City</th>
+      <th>Min temp</th>
+      <th>Max temp</th>
+      <th>Short description</th>
+      <th>Chance of rain</th>
+      <th>Long description</th>
+      <th>Uv index</th>
+      <th>Possible rainfall</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forecasts.each do |forecast| %>
+      <tr>
+        <td><%= forecast.date %></td>
+        <td><%= image_tag(forecast.image_url) %></td>
+        <td><%= forecast.city.name %></td>
+        <td><%= forecast.min_temp %></td>
+        <td><%= forecast.max_temp %></td>
+        <td><%= forecast.short_description %></td>
+        <td><%= forecast.chance_of_rain %>%</td>
+        <td><%= forecast.long_description %></td>
+        <td><%= forecast.uv_index %></td>
+        <td><%= forecast.possible_rainfall %></td>
+        <td><%= link_to 'Show', forecast %></td>
+        <td><%= link_to 'Edit', edit_forecast_path(forecast) %></td>
+        <td><%= link_to 'Destroy', forecast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Forecast', new_forecast_path %>
