@@ -1,6 +1,6 @@
 <h1>Editing Forecast</h1>
 
-<%= render 'form', forecast: @forecast %>
+<%= render 'form', city: @city, forecast: @forecast %>
 
-<%= link_to 'Show', @forecast %> |
-<%= link_to 'Back', forecasts_path %>
+<%= link_to 'Show', city_forecast_path(@city, @forecast) %> |
+<%= link_to 'Back', city_forecasts_path(@city) %>

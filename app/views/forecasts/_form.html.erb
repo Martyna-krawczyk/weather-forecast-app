@@ -1,4 +1,4 @@
-<%= form_with(model: forecast, local: true) do |form| %>
+<%= form_with(model: [@city, forecast], local: true) do |form| %>
   <% if forecast.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(forecast.errors.count, "error") %> prohibited this forecast from being saved:</h2>

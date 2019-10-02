@@ -50,5 +50,5 @@
   <%= @forecast.city.name %>
 </p>
 
-<%= link_to 'Edit', edit_forecast_path(@forecast) %> |
-<%= link_to 'Back', forecasts_path %>
+<%= link_to 'Edit', edit_city_forecast_path(@forecast, @city) %> |
+<%= link_to 'Back', city_forecasts_path(@city) %>

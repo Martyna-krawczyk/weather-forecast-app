@@ -1,10 +1,11 @@
 class ForecastsController < ApplicationController
   before_action :set_forecast, only: [:show, :edit, :update, :destroy]
+  before_action :set_city
 
   # GET /forecasts
   # GET /forecasts.json
   def index
-    @forecasts = Forecast.order('date')
+    @forecasts = Forecast.order('date').select {|forecast| forecast.city_id == @city.id}
   end
 
   # GET /forecasts/1
@@ -25,10 +26,11 @@ class ForecastsController < ApplicationController
   # POST /forecasts.json
   def create
     @forecast = Forecast.new(forecast_params)
+    @forecast.city_id = @city.id
 
     respond_to do |format|
       if @forecast.save
-        format.html { redirect_to @forecast, notice: 'Forecast was successfully created.' }
+        format.html { redirect_to city_forecast_path(@forecast, @city), notice: 'Forecast was successfully created.' }
         format.json { render :show, status: :created, location: @forecast }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class ForecastsController < ApplicationController
   def update
     respond_to do |format|
       if @forecast.update(forecast_params)
-        format.html { redirect_to @forecast, notice: 'Forecast was successfully updated.' }
+        format.html { redirect_to city_forecast_path(@forecast, @city), notice: 'Forecast was successfully updated.' }
         format.json { render :show, status: :ok, location: @forecast }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class ForecastsController < ApplicationController
   def destroy
     @forecast.destroy
     respond_to do |format|
-      format.html { redirect_to forecasts_url, notice: 'Forecast was successfully destroyed.' }
+      format.html { redirect_to city_forecasts_path (@city), notice: 'Forecast was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class ForecastsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_forecast
       @forecast = Forecast.find(params[:id])
+    end
+
+    def set_city
+      @city = City.find(params[:city_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
