@@ -1,11 +1,11 @@
 class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :edit, :update, :destroy]
-  before_action :set_state
+  
 
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.order('name').select {|city| city.state_id == @state.id}
+    @cities = City.order('name')
   end
 
   # GET /cities/1
@@ -29,7 +29,7 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to state_city_path(@state, @city), notice: 'City was successfully created.' }
+        format.html { redirect_to city_path(@city), notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class CitiesController < ApplicationController
   def update
     respond_to do |format|
       if @city.update(city_params)
-        format.html { redirect_to state_city_path(@city, @state), notice: 'City was successfully updated.' }
+        format.html { redirect_to city_path(@city), notice: 'City was successfully updated.' }
         format.json { render :show, status: :ok, location: @city }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class CitiesController < ApplicationController
   def destroy
     @city.destroy
     respond_to do |format|
-      format.html { redirect_to state_cities_path(@state), notice: 'City was successfully destroyed.' }
+      format.html { redirect_to cities_path, notice: 'City was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,12 +68,8 @@ class CitiesController < ApplicationController
       @city = City.find(params[:id])
     end
 
-    def set_state
-      @state = State.find(params[:state_id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :state_id)
+      params.require(:city).permit(:name)
     end
 end

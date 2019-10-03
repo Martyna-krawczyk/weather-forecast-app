@@ -1,6 +1,6 @@
 <h1>Editing City</h1>
 
-<%= render 'form', state: @state, city: @city %>
+<%= render 'form', city: @city %>
 
-<%= link_to 'Show', state_city_path(state,@city) %> |
-<%= link_to 'Back', state_cities_path(@state) %>
+<%= link_to 'Show', city_path(@city) %> |
+<%= link_to 'Back', cities_path %>

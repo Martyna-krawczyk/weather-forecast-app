@@ -6,6 +6,15 @@
 </p>
 
 <p>
+  <strong>Cities:</strong>
+    <ul>
+      <% @cities.each do |city| %>
+        <li><%= link_to "#{city.name}", city_path(city) %>
+      <% end %>
+    </ul>
+</p>
+
+<p>
   <strong>Warnings:</strong>
   <%= @state.warnings %>
 </p>
