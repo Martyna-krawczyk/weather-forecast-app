@@ -13,6 +13,9 @@ class CitiesController < ApplicationController
   def show
   end
 
+  def city_forecasts_path
+  end
+
   # GET /cities/new
   def new
     @city = City.new
@@ -26,7 +29,7 @@ class CitiesController < ApplicationController
   # POST /cities.json
   def create
     @city = City.new(city_params)
-
+  
     respond_to do |format|
       if @city.save
         format.html { redirect_to city_path(@city), notice: 'City was successfully created.' }
@@ -70,6 +73,6 @@ class CitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name)
+      params.require(:city).permit(:name, :state_id)
     end
 end

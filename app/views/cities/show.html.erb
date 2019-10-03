@@ -10,5 +10,10 @@
   <%= @city.state.name %>
 </p>
 
+<p>
+  <strong>Forecasts:</strong>
+  <%= link_to 'Forecasts',city_forecasts_path(@city, @forecasts) %>
+</p>
+
 <%= link_to 'Edit', edit_city_path(@city) %> |
 <%= link_to 'Back', cities_path %>
