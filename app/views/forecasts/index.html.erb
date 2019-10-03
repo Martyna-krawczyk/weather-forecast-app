@@ -32,9 +32,9 @@
         <td><%= forecast.long_description %></td>
         <td><%= forecast.uv_index %></td>
         <td><%= forecast.possible_rainfall %></td>
-        <td><%= link_to 'Show', city_forecast_path(@city, forecast) %></td>
-        <td><%= link_to 'Edit', edit_city_forecast_path(@city, forecast) %></td>
-        <td><%= link_to 'Destroy', city_forecast_path(@city, forecast), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', state_city_forecast_path(@state, @city, forecast) %></td>
+        <td><%= link_to 'Edit', edit_state_city_forecast_path(@state, @city, forecast) %></td>
+        <td><%= link_to 'Destroy', state_city_forecast_path(@state, @city, forecast), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -42,4 +42,4 @@
 
 <br>
 
-<%= link_to 'New Forecast', new_city_forecast_path %>
+<%= link_to 'New Forecast', new_state_city_forecast_path %>

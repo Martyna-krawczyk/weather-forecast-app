@@ -1,6 +1,7 @@
 class ForecastsController < ApplicationController
   before_action :set_forecast, only: [:show, :edit, :update, :destroy]
   before_action :set_city
+  before_action :set_state
 
   # GET /forecasts
   # GET /forecasts.json
@@ -30,7 +31,7 @@ class ForecastsController < ApplicationController
 
     respond_to do |format|
       if @forecast.save
-        format.html { redirect_to city_forecast_path(@forecast, @city), notice: 'Forecast was successfully created.' }
+        format.html { redirect_to state_city_forecast_path(@state, @forecast, @city), notice: 'Forecast was successfully created.' }
         format.json { render :show, status: :created, location: @forecast }
       else
         format.html { render :new }
@@ -44,7 +45,7 @@ class ForecastsController < ApplicationController
   def update
     respond_to do |format|
       if @forecast.update(forecast_params)
-        format.html { redirect_to city_forecast_path(@forecast, @city), notice: 'Forecast was successfully updated.' }
+        format.html { redirect_to state_city_forecast_path(@forecast, @state, @city), notice: 'Forecast was successfully updated.' }
         format.json { render :show, status: :ok, location: @forecast }
       else
         format.html { render :edit }
@@ -58,7 +59,7 @@ class ForecastsController < ApplicationController
   def destroy
     @forecast.destroy
     respond_to do |format|
-      format.html { redirect_to city_forecasts_path (@city), notice: 'Forecast was successfully destroyed.' }
+      format.html { redirect_to state_city_forecasts_path(@state, @city), notice: 'Forecast was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +72,10 @@ class ForecastsController < ApplicationController
 
     def set_city
       @city = City.find(params[:city_id])
+    end
+
+    def set_state
+      @state = State.where( 'id ?', @city.state_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
